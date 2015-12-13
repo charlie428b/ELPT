@@ -37,7 +37,8 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonOLD = new System.Windows.Forms.Button();
+            this.buttonDcom = new System.Windows.Forms.Button();
+            this.buttonBing = new System.Windows.Forms.Button();
             this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.Button1 = new System.Windows.Forms.Button();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
@@ -160,22 +161,35 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.buttonOLD);
+            this.flowLayoutPanel2.Controls.Add(this.buttonDcom);
+            this.flowLayoutPanel2.Controls.Add(this.buttonBing);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(600, 29);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
-            // buttonOLD
+            // buttonDcom
             // 
-            this.buttonOLD.AutoSize = true;
-            this.buttonOLD.Location = new System.Drawing.Point(3, 3);
-            this.buttonOLD.Name = "buttonOLD";
-            this.buttonOLD.Size = new System.Drawing.Size(45, 26);
-            this.buttonOLD.TabIndex = 0;
-            this.buttonOLD.Text = "OLD";
-            this.buttonOLD.UseVisualStyleBackColor = true;
+            this.buttonDcom.AutoSize = true;
+            this.buttonDcom.Location = new System.Drawing.Point(3, 3);
+            this.buttonDcom.Name = "buttonDcom";
+            this.buttonDcom.Size = new System.Drawing.Size(129, 26);
+            this.buttonDcom.TabIndex = 0;
+            this.buttonDcom.Text = "Dictionary.com";
+            this.buttonDcom.UseVisualStyleBackColor = true;
+            this.buttonDcom.Click += new System.EventHandler(this.buttonDcom_Click);
+            // 
+            // buttonBing
+            // 
+            this.buttonBing.AutoSize = true;
+            this.buttonBing.Location = new System.Drawing.Point(138, 3);
+            this.buttonBing.Name = "buttonBing";
+            this.buttonBing.Size = new System.Drawing.Size(47, 26);
+            this.buttonBing.TabIndex = 1;
+            this.buttonBing.Text = "必应";
+            this.buttonBing.UseVisualStyleBackColor = true;
+            this.buttonBing.Click += new System.EventHandler(this.buttonBing_Click);
             // 
             // TableLayoutPanel2
             // 
@@ -273,8 +287,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.WebBrowser webBrowser2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button buttonOLD;
+        private System.Windows.Forms.Button buttonDcom;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonBing;
     }
 }
 
