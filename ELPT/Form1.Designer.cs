@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -112,7 +113,7 @@
             this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(393, 493);
             this.webBrowser1.TabIndex = 1;
-            this.webBrowser1.Url = new System.Uri("http://dict.youdao.com/search?q=halo", System.UriKind.Absolute);
+            this.webBrowser1.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
             // flowLayoutPanel1
             // 
@@ -157,7 +158,7 @@
             this.webBrowser2.ScriptErrorsSuppressed = true;
             this.webBrowser2.Size = new System.Drawing.Size(600, 493);
             this.webBrowser2.TabIndex = 1;
-            this.webBrowser2.Url = new System.Uri("http://oxfordlearnersdictionaries.com/definition/american_english/hello", System.UriKind.Absolute);
+            this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
             // flowLayoutPanel2
             // 
@@ -253,8 +254,9 @@
             this.ClientSize = new System.Drawing.Size(1015, 590);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "English Learner\'s Power Tools";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
