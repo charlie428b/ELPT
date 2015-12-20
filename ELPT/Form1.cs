@@ -15,16 +15,16 @@ namespace ELPT
     {
         public Form1()
         {
-            //在初始化时判断是否为初次运行，若是，导入注册表
-            if (!(File.Exists(Application.StartupPath+"\\NotFirstRun.elptsetting")))
-            {
-                System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
-                if (Environment.Is64BitOperatingSystem)
-                {
-                    System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
-                }
-                File.Create(Application.StartupPath + "\\NotFirstRun.elptsetting");
-            }
+            ////在初始化时判断是否为初次运行，若是，导入注册表
+            //if (!(File.Exists(System.Environment.GetEnvironmentVariable("appdata")+"\\ELPT\\NotFirstRun.elptsetting")))
+            //{
+            //    System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
+            //    if (Environment.Is64BitOperatingSystem)
+            //    {
+            //        System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
+            //    }
+            //    File.Create(Application.StartupPath + "\\NotFirstRun.elptsetting");
+            //}
             InitializeComponent();
         }
 
