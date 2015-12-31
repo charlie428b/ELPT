@@ -112,5 +112,35 @@ namespace ELPT
             Search();
             _left = temp;
         }
+
+        /// <summary>
+        /// 当用户按下alt时显示工具栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStrip1_MenuActivate(object sender, EventArgs e)
+        {
+            menuStrip1.Show();
+        }
+
+        /// <summary>
+        /// 当工具栏失去焦点时隐藏工具栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void menuStrip1_MenuDeactivate(object sender, EventArgs e)
+        {
+            menuStrip1.Hide();
+        }
+
+        /// <summary>
+        /// 显示关于信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Format("版本{0}\n刘持冰制作",Application.ProductVersion));
+        }
     }
 }
