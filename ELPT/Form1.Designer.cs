@@ -48,6 +48,7 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonLexi = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -71,7 +72,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 47F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1015, 590);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -80,7 +81,8 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 53);
+            this.splitContainer2.Location = new System.Drawing.Point(3, 47);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -90,7 +92,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel4);
-            this.splitContainer2.Size = new System.Drawing.Size(1009, 534);
+            this.splitContainer2.Size = new System.Drawing.Size(1009, 540);
             this.splitContainer2.SplitterDistance = 399;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -104,19 +106,19 @@
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(399, 534);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(399, 540);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // webBrowser1
             // 
             this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 38);
+            this.webBrowser1.Location = new System.Drawing.Point(3, 32);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(393, 493);
+            this.webBrowser1.Size = new System.Drawing.Size(393, 505);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
@@ -124,7 +126,8 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.buttonYouDao);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(393, 29);
             this.flowLayoutPanel1.TabIndex = 0;
@@ -132,7 +135,8 @@
             // buttonYouDao
             // 
             this.buttonYouDao.AutoSize = true;
-            this.buttonYouDao.Location = new System.Drawing.Point(3, 3);
+            this.buttonYouDao.Location = new System.Drawing.Point(3, 0);
+            this.buttonYouDao.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.buttonYouDao.Name = "buttonYouDao";
             this.buttonYouDao.Size = new System.Drawing.Size(47, 26);
             this.buttonYouDao.TabIndex = 0;
@@ -149,19 +153,19 @@
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(606, 534);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(606, 540);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // webBrowser2
             // 
             this.webBrowser2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser2.Location = new System.Drawing.Point(3, 38);
+            this.webBrowser2.Location = new System.Drawing.Point(3, 32);
             this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser2.Name = "webBrowser2";
             this.webBrowser2.ScriptErrorsSuppressed = true;
-            this.webBrowser2.Size = new System.Drawing.Size(600, 493);
+            this.webBrowser2.Size = new System.Drawing.Size(600, 505);
             this.webBrowser2.TabIndex = 1;
             this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
@@ -169,8 +173,10 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.buttonDcom);
             this.flowLayoutPanel2.Controls.Add(this.buttonBing);
+            this.flowLayoutPanel2.Controls.Add(this.buttonLexi);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(600, 29);
             this.flowLayoutPanel2.TabIndex = 0;
@@ -178,7 +184,8 @@
             // buttonDcom
             // 
             this.buttonDcom.AutoSize = true;
-            this.buttonDcom.Location = new System.Drawing.Point(3, 3);
+            this.buttonDcom.Location = new System.Drawing.Point(3, 0);
+            this.buttonDcom.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.buttonDcom.Name = "buttonDcom";
             this.buttonDcom.Size = new System.Drawing.Size(129, 26);
             this.buttonDcom.TabIndex = 0;
@@ -189,7 +196,8 @@
             // buttonBing
             // 
             this.buttonBing.AutoSize = true;
-            this.buttonBing.Location = new System.Drawing.Point(138, 3);
+            this.buttonBing.Location = new System.Drawing.Point(138, 0);
+            this.buttonBing.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.buttonBing.Name = "buttonBing";
             this.buttonBing.Size = new System.Drawing.Size(47, 26);
             this.buttonBing.TabIndex = 1;
@@ -206,6 +214,7 @@
             this.TableLayoutPanel2.Controls.Add(this.ComboBox1, 0, 0);
             this.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.TableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.TableLayoutPanel2.Name = "TableLayoutPanel2";
             this.TableLayoutPanel2.RowCount = 1;
             this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -277,15 +286,27 @@
             // 帮助ToolStripMenuItem1
             // 
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
-            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(114, 26);
             this.帮助ToolStripMenuItem1.Text = "帮助";
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
+            // 
+            // buttonLexi
+            // 
+            this.buttonLexi.AutoSize = true;
+            this.buttonLexi.Location = new System.Drawing.Point(191, 0);
+            this.buttonLexi.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.buttonLexi.Name = "buttonLexi";
+            this.buttonLexi.Size = new System.Drawing.Size(89, 26);
+            this.buttonLexi.TabIndex = 2;
+            this.buttonLexi.Text = "Lexipedia";
+            this.buttonLexi.UseVisualStyleBackColor = true;
+            this.buttonLexi.Click += new System.EventHandler(this.buttonLexi_Click);
             // 
             // Form1
             // 
@@ -343,6 +364,7 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.Button buttonLexi;
     }
 }
 

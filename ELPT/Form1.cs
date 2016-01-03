@@ -30,7 +30,7 @@ namespace ELPT
 
         //flags
         private int _left = 0;//0=有道 1=必应
-        private int _right = 1;//0=Dictionary.com 1=必应
+        private int _right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -71,6 +71,9 @@ namespace ELPT
                 case 1://必应
                     webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
                     //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
+                    break;
+                case 3://Lexipedia
+                    webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
                     break;
             }
         }
@@ -141,6 +144,20 @@ namespace ELPT
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(string.Format("版本{0}\n刘持冰制作",Application.ProductVersion));
+        }
+
+        /// <summary>
+        /// 将右侧窗格的词典切换至Lexipedia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonLexi_Click(object sender, EventArgs e)
+        {
+            int temp = _left;//注释见buttonDcom_Click的注释
+            _left = -1;
+            _right = 2;
+            Search();
+            _left = temp;
         }
     }
 }
