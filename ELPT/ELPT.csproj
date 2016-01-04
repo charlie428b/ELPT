@@ -29,7 +29,7 @@
     <ProductName>ELPT</ProductName>
     <PublisherName>刘持冰</PublisherName>
     <SuiteName>ELPT</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>0.1.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
