@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,8 +31,11 @@ namespace ELPT
         }
 
         //flags
-        private int _left = 0;//0=有道 1=必应
+        private int _left = 1;//0=有道 1=纯文本
         private int _right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
+
+        private WebClient wc = new WebClient();
+        private Regex regText = new Regex(@"(?<=\{""tr"":\[\{""l"":\{""i"":\["").+?(?=""\]\}\}\]\})");
 
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -59,6 +64,19 @@ namespace ELPT
                 case -1: break;//在切换词典时执行，节省资源
                 case 0://有道
                     webBrowser1.Navigate("http://dict.youdao.com/search?q=" + ComboBox1.Items[0]);
+                    break;
+                case 1://纯文本
+                    labelWord.Text = ComboBox1.Items[0].ToString();
+                    byte[] resultByte = wc.DownloadData("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
+                    string result = Encoding.UTF8.GetString(resultByte);
+                    if (regText.IsMatch(result))
+                    {
+                        MatchCollection matches = regText.Matches(result);
+                        for (int i = 0; i < matches.Count; i++)
+                        {
+                            richTextBox1.Text += "\n" + matches[i];
+                        }
+                    }
                     break;
             }
 
@@ -143,7 +161,7 @@ namespace ELPT
         /// <param name="e"></param>
         private void 关于ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(string.Format("版本{0}\n刘持冰制作",Application.ProductVersion));
+            MessageBox.Show(string.Format("版本{0}\n刘持冰制作", Application.ProductVersion));
         }
 
         /// <summary>
@@ -158,6 +176,17 @@ namespace ELPT
             _right = 2;
             Search();
             _left = temp;
+        }
+
+        private void buttonText_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Hide();//隐藏webBrowser，显示richTextBox
+            panelTextBox.Show();
+            int temp = _right;//使右边不必更新
+            _right = -1;
+            _left = 1;//更改flags
+            Search();
+            _right = temp;//恢复右边的flags
         }
     }
 }
