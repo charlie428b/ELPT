@@ -35,8 +35,15 @@ namespace ELPT
         private int _right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
 
         private WebClient wc = new WebClient();
+        //声明所需正则表达式
         private Regex regText = new Regex(@"(?<=\{""tr"":\[\{""l"":\{""i"":\["").+?(?=""\]\}\}\]\})");
+        private Regex regPronounce = new Regex(@"(?<=\[\{\""L\"":\""US\"",\""V\"":\"").+(?=\""\},)");
 
+        /// <summary>
+        /// 点击查询按钮或按回车时执行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
             Search();
@@ -68,6 +75,18 @@ namespace ELPT
                 case 1://纯文本
                     labelWord.Text = ComboBox1.Items[0].ToString();
                     richTextBox1.ResetText();
+                    //从必应查询美式读音
+                    byte[] resultByteP = wc.DownloadData("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
+                    string resultP = Encoding.UTF8.GetString(resultByteP);
+                    if (regPronounce.IsMatch(resultP))
+                    {
+                        MatchCollection matches = regPronounce.Matches(resultP);
+                        for (int i = 0; i < matches.Count; i++)
+                        {
+                            richTextBox1.Text += "[" + matches[i].Value + "]";
+                        }
+                    }
+                    //从有道查询解释
                     byte[] resultByte = wc.DownloadData("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
                     string result = Encoding.UTF8.GetString(resultByte);
                     if (regText.IsMatch(result))
@@ -75,9 +94,10 @@ namespace ELPT
                         MatchCollection matches = regText.Matches(result);
                         for (int i = 0; i < matches.Count; i++)
                         {
-                            richTextBox1.Text += "\n" + matches[i];
+                            richTextBox1.Text += "\n" + matches[i].Value.Replace("\\u2026", "...");
                         }
                     }
+
                     break;
             }
 
@@ -179,6 +199,11 @@ namespace ELPT
             _left = temp;
         }
 
+        /// <summary>
+        /// 将右侧窗格的词典切换至综合查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonText_Click(object sender, EventArgs e)
         {
             webBrowser1.Hide();//隐藏webBrowser，显示richTextBox
@@ -186,6 +211,22 @@ namespace ELPT
             int temp = _right;//使右边不必更新
             _right = -1;
             _left = 1;//更改flags
+            Search();
+            _right = temp;//恢复右边的flags
+        }
+
+        /// <summary>
+        /// 将右侧窗格的词典切换至有道
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonYoudao_Click(object sender, EventArgs e)
+        {
+            webBrowser1.Show();//隐藏webBrowser，显示richTextBox
+            panelTextBox.Hide();
+            int temp = _right;//使右边不必更新
+            _right = -1;
+            _left = 0;//更改flags
             Search();
             _right = temp;//恢复右边的flags
         }

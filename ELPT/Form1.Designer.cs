@@ -36,9 +36,7 @@
             this.buttonYouDao = new System.Windows.Forms.Button();
             this.buttonText = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panelTextBox = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.labelWord = new System.Windows.Forms.Label();
+            this.panelTextBox = new System.Windows.Forms.TableLayoutPanel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
@@ -54,6 +52,8 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelWord = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -140,6 +140,7 @@
             this.buttonYouDao.TabIndex = 0;
             this.buttonYouDao.Text = "有道";
             this.buttonYouDao.UseVisualStyleBackColor = true;
+            this.buttonYouDao.Click += new System.EventHandler(this.buttonYoudao_Click);
             // 
             // buttonText
             // 
@@ -147,9 +148,9 @@
             this.buttonText.Location = new System.Drawing.Point(56, 0);
             this.buttonText.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.buttonText.Name = "buttonText";
-            this.buttonText.Size = new System.Drawing.Size(62, 26);
+            this.buttonText.Size = new System.Drawing.Size(77, 26);
             this.buttonText.TabIndex = 1;
-            this.buttonText.Text = "纯文本";
+            this.buttonText.Text = "综合查询";
             this.buttonText.UseVisualStyleBackColor = true;
             this.buttonText.Click += new System.EventHandler(this.buttonText_Click);
             // 
@@ -167,36 +168,20 @@
             // panelTextBox
             // 
             this.panelTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.panelTextBox.Controls.Add(this.richTextBox1);
-            this.panelTextBox.Controls.Add(this.labelWord);
+            this.panelTextBox.ColumnCount = 3;
+            this.panelTextBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.panelTextBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panelTextBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.panelTextBox.Controls.Add(this.labelWord, 1, 0);
+            this.panelTextBox.Controls.Add(this.richTextBox1, 1, 1);
             this.panelTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelTextBox.Location = new System.Drawing.Point(0, 0);
             this.panelTextBox.Name = "panelTextBox";
+            this.panelTextBox.RowCount = 2;
+            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.93738F));
+            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.06262F));
             this.panelTextBox.Size = new System.Drawing.Size(399, 511);
             this.panelTextBox.TabIndex = 2;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox1.Location = new System.Drawing.Point(17, 68);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(369, 440);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
-            // 
-            // labelWord
-            // 
-            this.labelWord.AutoSize = true;
-            this.labelWord.BackColor = System.Drawing.SystemColors.Window;
-            this.labelWord.Font = new System.Drawing.Font("微软雅黑", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelWord.Location = new System.Drawing.Point(10, 27);
-            this.labelWord.Name = "labelWord";
-            this.labelWord.Size = new System.Drawing.Size(269, 37);
-            this.labelWord.TabIndex = 0;
-            this.labelWord.Text = "在上方输入开始查询";
             // 
             // webBrowser1
             // 
@@ -375,6 +360,30 @@
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
+            // labelWord
+            // 
+            this.labelWord.AutoSize = true;
+            this.labelWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelWord.Font = new System.Drawing.Font("微软雅黑", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelWord.Location = new System.Drawing.Point(29, 0);
+            this.labelWord.Name = "labelWord";
+            this.labelWord.Size = new System.Drawing.Size(346, 61);
+            this.labelWord.TabIndex = 0;
+            this.labelWord.Text = "在上方输入开始查询";
+            this.labelWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox1.Location = new System.Drawing.Point(29, 64);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(346, 444);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.Button1;
@@ -437,7 +446,7 @@
         private System.Windows.Forms.Button buttonLexi;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button buttonText;
-        private System.Windows.Forms.Panel panelTextBox;
+        private System.Windows.Forms.TableLayoutPanel panelTextBox;
         private System.Windows.Forms.Label labelWord;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
