@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -86,6 +87,8 @@ namespace ELPT
                             richTextBox1.Text += "[" + matches[i].Value + "]";
                         }
                     }
+                    //加载并播放来自必应的发音
+                    axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
                     //从有道查询解释
                     byte[] resultByte = wc.DownloadData("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
                     string result = Encoding.UTF8.GetString(resultByte);
@@ -229,6 +232,26 @@ namespace ELPT
             _left = 0;//更改flags
             Search();
             _right = temp;//恢复右边的flags
+        }
+
+        /// <summary>
+        /// 当调整窗口大小时将splitContainer的拆分器位置设为50%处
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            splitContainer2.SplitterDistance = Size.Width / 2;
+        }
+
+        /// <summary>
+        /// 当窗口加载时将splitContainer的拆分器位置设为50%处
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            splitContainer2.SplitterDistance = Size.Width / 2;
         }
     }
 }

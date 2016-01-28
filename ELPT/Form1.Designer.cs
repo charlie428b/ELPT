@@ -33,10 +33,12 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonYouDao = new System.Windows.Forms.Button();
             this.buttonText = new System.Windows.Forms.Button();
+            this.buttonYouDao = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelTextBox = new System.Windows.Forms.TableLayoutPanel();
+            this.labelWord = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
@@ -45,6 +47,7 @@
             this.buttonBing = new System.Windows.Forms.Button();
             this.buttonLexi = new System.Windows.Forms.Button();
             this.TableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.Button1 = new System.Windows.Forms.Button();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -52,8 +55,6 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelWord = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -66,6 +67,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.TableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,7 +89,6 @@
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.Location = new System.Drawing.Point(3, 47);
             this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.splitContainer2.Name = "splitContainer2";
@@ -100,7 +101,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel4);
             this.splitContainer2.Size = new System.Drawing.Size(1009, 540);
-            this.splitContainer2.SplitterDistance = 399;
+            this.splitContainer2.SplitterDistance = 380;
             this.splitContainer2.TabIndex = 6;
             // 
             // tableLayoutPanel3
@@ -116,36 +117,24 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(399, 540);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(380, 540);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.buttonYouDao);
             this.flowLayoutPanel1.Controls.Add(this.buttonText);
+            this.flowLayoutPanel1.Controls.Add(this.buttonYouDao);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 0);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(393, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(374, 29);
             this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // buttonYouDao
-            // 
-            this.buttonYouDao.AutoSize = true;
-            this.buttonYouDao.Location = new System.Drawing.Point(3, 0);
-            this.buttonYouDao.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.buttonYouDao.Name = "buttonYouDao";
-            this.buttonYouDao.Size = new System.Drawing.Size(47, 26);
-            this.buttonYouDao.TabIndex = 0;
-            this.buttonYouDao.Text = "有道";
-            this.buttonYouDao.UseVisualStyleBackColor = true;
-            this.buttonYouDao.Click += new System.EventHandler(this.buttonYoudao_Click);
             // 
             // buttonText
             // 
             this.buttonText.AutoSize = true;
-            this.buttonText.Location = new System.Drawing.Point(56, 0);
+            this.buttonText.Location = new System.Drawing.Point(3, 0);
             this.buttonText.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.buttonText.Name = "buttonText";
             this.buttonText.Size = new System.Drawing.Size(77, 26);
@@ -154,15 +143,27 @@
             this.buttonText.UseVisualStyleBackColor = true;
             this.buttonText.Click += new System.EventHandler(this.buttonText_Click);
             // 
+            // buttonYouDao
+            // 
+            this.buttonYouDao.AutoSize = true;
+            this.buttonYouDao.Location = new System.Drawing.Point(86, 0);
+            this.buttonYouDao.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.buttonYouDao.Name = "buttonYouDao";
+            this.buttonYouDao.Size = new System.Drawing.Size(47, 26);
+            this.buttonYouDao.TabIndex = 0;
+            this.buttonYouDao.Text = "有道";
+            this.buttonYouDao.UseVisualStyleBackColor = true;
+            this.buttonYouDao.Click += new System.EventHandler(this.buttonYoudao_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.panelTextBox);
             this.panel1.Controls.Add(this.webBrowser1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 29);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Location = new System.Drawing.Point(0, 32);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(399, 511);
+            this.panel1.Size = new System.Drawing.Size(380, 508);
             this.panel1.TabIndex = 2;
             // 
             // panelTextBox
@@ -180,8 +181,34 @@
             this.panelTextBox.RowCount = 2;
             this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.93738F));
             this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.06262F));
-            this.panelTextBox.Size = new System.Drawing.Size(399, 511);
+            this.panelTextBox.Size = new System.Drawing.Size(380, 508);
             this.panelTextBox.TabIndex = 2;
+            // 
+            // labelWord
+            // 
+            this.labelWord.AutoSize = true;
+            this.labelWord.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelWord.Font = new System.Drawing.Font("微软雅黑", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelWord.Location = new System.Drawing.Point(29, 0);
+            this.labelWord.Name = "labelWord";
+            this.labelWord.Size = new System.Drawing.Size(327, 60);
+            this.labelWord.TabIndex = 0;
+            this.labelWord.Text = "在上方输入开始查询";
+            this.labelWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.richTextBox1.Location = new System.Drawing.Point(33, 63);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(323, 442);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "";
             // 
             // webBrowser1
             // 
@@ -190,7 +217,7 @@
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.Size = new System.Drawing.Size(399, 511);
+            this.webBrowser1.Size = new System.Drawing.Size(380, 508);
             this.webBrowser1.TabIndex = 1;
             this.webBrowser1.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             this.webBrowser1.Visible = false;
@@ -207,7 +234,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(606, 540);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(625, 540);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // webBrowser2
@@ -217,7 +244,7 @@
             this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser2.Name = "webBrowser2";
             this.webBrowser2.ScriptErrorsSuppressed = true;
-            this.webBrowser2.Size = new System.Drawing.Size(600, 505);
+            this.webBrowser2.Size = new System.Drawing.Size(619, 505);
             this.webBrowser2.TabIndex = 1;
             this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
@@ -230,7 +257,7 @@
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(600, 29);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(619, 29);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // buttonDcom
@@ -271,9 +298,11 @@
             // 
             // TableLayoutPanel2
             // 
-            this.TableLayoutPanel2.ColumnCount = 2;
+            this.TableLayoutPanel2.ColumnCount = 3;
             this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
+            this.TableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.TableLayoutPanel2.Controls.Add(this.axWindowsMediaPlayer1, 2, 0);
             this.TableLayoutPanel2.Controls.Add(this.Button1, 0, 0);
             this.TableLayoutPanel2.Controls.Add(this.ComboBox1, 0, 0);
             this.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -282,19 +311,28 @@
             this.TableLayoutPanel2.Name = "TableLayoutPanel2";
             this.TableLayoutPanel2.RowCount = 1;
             this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.TableLayoutPanel2.Size = new System.Drawing.Size(1009, 44);
             this.TableLayoutPanel2.TabIndex = 5;
+            // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(956, 3);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(50, 38);
+            this.axWindowsMediaPlayer1.TabIndex = 3;
             // 
             // Button1
             // 
             this.Button1.AutoSize = true;
             this.Button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Button1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Button1.Location = new System.Drawing.Point(911, 4);
+            this.Button1.Location = new System.Drawing.Point(853, 4);
             this.Button1.Margin = new System.Windows.Forms.Padding(4);
             this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(94, 36);
+            this.Button1.Size = new System.Drawing.Size(96, 36);
             this.Button1.TabIndex = 2;
             this.Button1.Text = "查询";
             this.Button1.UseVisualStyleBackColor = true;
@@ -309,7 +347,7 @@
             this.ComboBox1.Location = new System.Drawing.Point(4, 4);
             this.ComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.ComboBox1.Name = "ComboBox1";
-            this.ComboBox1.Size = new System.Drawing.Size(899, 35);
+            this.ComboBox1.Size = new System.Drawing.Size(841, 35);
             this.ComboBox1.TabIndex = 1;
             // 
             // button2
@@ -360,30 +398,6 @@
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
-            // labelWord
-            // 
-            this.labelWord.AutoSize = true;
-            this.labelWord.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWord.Font = new System.Drawing.Font("微软雅黑", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelWord.Location = new System.Drawing.Point(29, 0);
-            this.labelWord.Name = "labelWord";
-            this.labelWord.Size = new System.Drawing.Size(346, 61);
-            this.labelWord.TabIndex = 0;
-            this.labelWord.Text = "在上方输入开始查询";
-            this.labelWord.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.richTextBox1.Location = new System.Drawing.Point(29, 64);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(346, 444);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "";
-            // 
             // Form1
             // 
             this.AcceptButton = this.Button1;
@@ -399,6 +413,8 @@
             this.Name = "Form1";
             this.Text = "English Learner\'s Power Tools";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -415,6 +431,7 @@
             this.flowLayoutPanel2.PerformLayout();
             this.TableLayoutPanel2.ResumeLayout(false);
             this.TableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -449,6 +466,7 @@
         private System.Windows.Forms.TableLayoutPanel panelTextBox;
         private System.Windows.Forms.Label labelWord;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }
 
