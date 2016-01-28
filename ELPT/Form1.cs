@@ -241,7 +241,11 @@ namespace ELPT
         /// <param name="e"></param>
         private void Form1_Resize(object sender, EventArgs e)
         {
-            splitContainer2.SplitterDistance = Size.Width / 2;
+            try
+            {
+                splitContainer2.SplitterDistance = Size.Width / 2;
+            }
+            catch { }
         }
 
         /// <summary>
