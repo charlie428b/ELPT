@@ -29,8 +29,8 @@
     <ProductName>ELPT</ProductName>
     <PublisherName>刘持冰</PublisherName>
     <SuiteName>ELPT</SuiteName>
-    <ApplicationRevision>13</ApplicationRevision>
-    <ApplicationVersion>0.1.5.%2a</ApplicationVersion>
+    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationVersion>0.1.6.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
