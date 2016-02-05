@@ -131,7 +131,7 @@ namespace ELPT
                     webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
                     //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
                     break;
-                case 3://Lexipedia
+                case 2://Lexipedia
                     webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
                     break;
             }
@@ -273,6 +273,29 @@ namespace ELPT
         private void Form1_Load(object sender, EventArgs e)
         {
             splitContainer2.SplitterDistance = Size.Width / 2;
+        }
+
+        /// <summary>
+        /// 点击菜单“隐藏右侧窗格”时隐藏或显示右侧窗格
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 仅综合查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.splitContainerPanel2Collapsed)
+            {
+                Properties.Settings.Default.splitContainerPanel2Collapsed = false;
+                splitContainer2.SplitterDistance = Size.Width / 2;
+            }
+            else
+            {
+                Properties.Settings.Default.splitContainerPanel2Collapsed = true;
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
     }
 }

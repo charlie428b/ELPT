@@ -52,6 +52,8 @@
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.选项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.仅综合查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +90,7 @@
             // 
             // splitContainer2
             // 
+            this.splitContainer2.DataBindings.Add(new System.Windows.Forms.Binding("Panel2Collapsed", global::ELPT.Properties.Settings.Default, "splitContainerPanel2Collapsed", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(3, 47);
             this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
@@ -100,6 +103,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel4);
+            this.splitContainer2.Panel2Collapsed = global::ELPT.Properties.Settings.Default.splitContainerPanel2Collapsed;
             this.splitContainer2.Size = new System.Drawing.Size(1009, 540);
             this.splitContainer2.SplitterDistance = 380;
             this.splitContainer2.TabIndex = 6;
@@ -366,6 +370,7 @@
             this.menuStrip1.AllowItemReorder = true;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.选项ToolStripMenuItem,
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -375,6 +380,22 @@
             this.menuStrip1.Visible = false;
             this.menuStrip1.MenuActivate += new System.EventHandler(this.menuStrip1_MenuActivate);
             this.menuStrip1.MenuDeactivate += new System.EventHandler(this.menuStrip1_MenuDeactivate);
+            // 
+            // 选项ToolStripMenuItem
+            // 
+            this.选项ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.仅综合查询ToolStripMenuItem});
+            this.选项ToolStripMenuItem.Name = "选项ToolStripMenuItem";
+            this.选项ToolStripMenuItem.Size = new System.Drawing.Size(51, 24);
+            this.选项ToolStripMenuItem.Text = "选项";
+            // 
+            // 仅综合查询ToolStripMenuItem
+            // 
+            this.仅综合查询ToolStripMenuItem.Checked = global::ELPT.Properties.Settings.Default.splitContainerPanel2Collapsed;
+            this.仅综合查询ToolStripMenuItem.Name = "仅综合查询ToolStripMenuItem";
+            this.仅综合查询ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.仅综合查询ToolStripMenuItem.Text = "隐藏右侧窗格";
+            this.仅综合查询ToolStripMenuItem.Click += new System.EventHandler(this.仅综合查询ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -413,6 +434,7 @@
             this.Name = "Form1";
             this.Text = "English Learner\'s Power Tools";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -467,6 +489,8 @@
         private System.Windows.Forms.Label labelWord;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private System.Windows.Forms.ToolStripMenuItem 选项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 仅综合查询ToolStripMenuItem;
     }
 }
 
