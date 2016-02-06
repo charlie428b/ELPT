@@ -34,5 +34,29 @@ namespace ELPT.Properties {
                 this["splitContainerPanel2Collapsed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int left {
+            get {
+                return ((int)(this["left"]));
+            }
+            set {
+                this["left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int right {
+            get {
+                return ((int)(this["right"]));
+            }
+            set {
+                this["right"] = value;
+            }
+        }
     }
 }

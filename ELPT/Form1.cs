@@ -11,6 +11,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ELPT
 {
@@ -31,16 +33,12 @@ namespace ELPT
             InitializeComponent();
         }
 
-        //flags
-        private int _left = 1;//0=有道 1=纯文本
-        private int _right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
+        //flags说明
+        //left = 1;//0=有道 1=纯文本
+        //right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
 
         private WebClient wc = new WebClient();
-        //声明所需正则表达式
-        private Regex regText = new Regex(@"(?<=\{""tr"":\[\{""l"":\{""i"":\["").+?(?=""\]\}\}\]\})");//来自有道的解释
-        private Regex regPronounce = new Regex(@"(?<=\[\{\""L\"":\""US\"",\""V\"":\"").+?(?=\""\},)");//来自必应的音标
-        private Regex regWordF = new Regex(@"(?<=\{\""wf\"":\{\""name\"":\"")(.+?)\"",\""value\"":\""(.+?)(?=\""\}\})");//来自有道的词形变化
-
+        
         /// <summary>
         /// 点击查询按钮或按回车时执行
         /// </summary>
@@ -68,13 +66,16 @@ namespace ELPT
                 return;
             }
 
-            switch (_left)//在左侧窗格中查询
+            //加载并播放来自必应的发音
+            axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
+
+            switch (Properties.Settings.Default.left)//在左侧窗格中查询
             {
                 case -1: break;//在切换词典时执行，节省资源
                 case 0://有道
                     webBrowser1.Navigate("http://dict.youdao.com/search?q=" + ComboBox1.Items[0]);
                     break;
-                case 1://纯文本
+                case 1://综合查询
                     labelWord.Text = ComboBox1.Items[0].ToString();
                     richTextBox1.ResetText();
                     try
@@ -82,46 +83,38 @@ namespace ELPT
                         //从必应查询美式读音
                         byte[] resultByteP = wc.DownloadData("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
                         string resultP = Encoding.UTF8.GetString(resultByteP);
-                        if (regPronounce.IsMatch(resultP))
-                        {
-                            MatchCollection matches = regPronounce.Matches(resultP);
-                            for (int i = 0; i < matches.Count; i++)
-                            {
-                                richTextBox1.Text += "[" + matches[i].Value + "]";
-                            }
-                        }
-                        //加载并播放来自必应的发音
-                        axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
+                        JObject pronounce = JObject.Parse(resultP);
+                        richTextBox1.Text += "[" + (string)pronounce["LEX"]["PRON"][0]["V"] + "]";
+                    }
+                    catch { }
+                    try
+                    {
                         //从有道查询解释
                         byte[] resultByte = wc.DownloadData("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
                         string result = Encoding.UTF8.GetString(resultByte);
-                        if (regText.IsMatch(result))
+                        JObject explain = JObject.Parse(result);
+                        foreach (var item in explain["ec"]["word"][0]["trs"].Children())
                         {
-                            MatchCollection matches = regText.Matches(result);
-                            for (int i = 0; i < matches.Count; i++)
-                            {
-                                richTextBox1.Text += "\n" + matches[i].Value.Replace("\\u2026", "...");
-                            }
+                            richTextBox1.Text += "\n" + (string)item["tr"][0]["l"]["i"][0];
                         }
+
                         //从有道查询词形变化
-                        if (regWordF.IsMatch(result))
+                        foreach (var item in explain["ec"]["word"][0]["wfs"])
                         {
-                            MatchCollection matches = regWordF.Matches(result);
-                            for (int i = 0; i < matches.Count; i++)
-                            {
-                                richTextBox1.Text += "\n" + matches[i].Groups[1].Value + "：" + matches[i].Groups[2].Value;
-                            }
+                            richTextBox1.Text += "\n" + (string)item["wf"]["name"] + "：" + (string)item["wf"]["value"];
                         }
                     }
-                    catch
-                    {
-                        labelWord.Text = "";
-                        richTextBox1.Text = "加载失败";
-                    }
+                    catch { }
                     break;
             }
 
-            switch (_right)//在右侧窗格中查询
+            //当右侧窗格被隐藏时不再在右侧窗格中查询
+            if (Properties.Settings.Default.splitContainerPanel2Collapsed)
+            {
+                return;
+            }
+            splitContainer2.Panel1Collapsed = false;
+            switch (Properties.Settings.Default.right)//在右侧窗格中查询
             {
                 case -1: break;//在切换词典时执行，节省资源
                 case 0://Dictionary.com
@@ -132,6 +125,7 @@ namespace ELPT
                     //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
                     break;
                 case 2://Lexipedia
+                    splitContainer2.Panel1Collapsed = true;
                     webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
                     break;
             }
@@ -154,11 +148,11 @@ namespace ELPT
         /// <param name="e"></param>
         private void buttonDcom_Click(object sender, EventArgs e)
         {
-            int temp = _left;
-            _left = -1;//使左侧窗格不必更新
-            _right = 0;
+            int temp = Properties.Settings.Default.left;
+            Properties.Settings.Default.left = -1;//使左侧窗格不必更新
+            Properties.Settings.Default.right = 0;
             Search();
-            _left = temp;//恢复左侧窗格的flag
+            Properties.Settings.Default.left = temp;//恢复左侧窗格的flag
         }
 
         /// <summary>
@@ -168,11 +162,11 @@ namespace ELPT
         /// <param name="e"></param>
         private void buttonBing_Click(object sender, EventArgs e)
         {
-            int temp = _left;//注释见buttonDcom_Click的注释
-            _left = -1;
-            _right = 1;
+            int temp = Properties.Settings.Default.left;//注释见buttonDcom_Click的注释
+            Properties.Settings.Default.left = -1;
+            Properties.Settings.Default.right = 1;
             Search();
-            _left = temp;
+            Properties.Settings.Default.left = temp;
         }
 
         /// <summary>
@@ -212,11 +206,11 @@ namespace ELPT
         /// <param name="e"></param>
         private void buttonLexi_Click(object sender, EventArgs e)
         {
-            int temp = _left;//注释见buttonDcom_Click的注释
-            _left = -1;
-            _right = 2;
+            int temp = Properties.Settings.Default.left;//注释见buttonDcom_Click的注释
+            Properties.Settings.Default.left = -1;
+            Properties.Settings.Default.right = 2;
             Search();
-            _left = temp;
+            Properties.Settings.Default.left = temp;
         }
 
         /// <summary>
@@ -228,11 +222,11 @@ namespace ELPT
         {
             webBrowser1.Hide();//隐藏webBrowser，显示richTextBox
             panelTextBox.Show();
-            int temp = _right;//使右边不必更新
-            _right = -1;
-            _left = 1;//更改flags
+            int temp = Properties.Settings.Default.right;//使右边不必更新
+            Properties.Settings.Default.right = -1;
+            Properties.Settings.Default.left = 1;//更改flags
             Search();
-            _right = temp;//恢复右边的flags
+            Properties.Settings.Default.right = temp;//恢复右边的flags
         }
 
         /// <summary>
@@ -244,11 +238,11 @@ namespace ELPT
         {
             webBrowser1.Show();//隐藏webBrowser，显示richTextBox
             panelTextBox.Hide();
-            int temp = _right;//使右边不必更新
-            _right = -1;
-            _left = 0;//更改flags
+            int temp = Properties.Settings.Default.right;//使右边不必更新
+            Properties.Settings.Default.right = -1;
+            Properties.Settings.Default.left = 0;//更改flags
             Search();
-            _right = temp;//恢复右边的flags
+            Properties.Settings.Default.right = temp;//恢复右边的flags
         }
 
         /// <summary>

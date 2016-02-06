@@ -393,7 +393,7 @@
             // 
             this.仅综合查询ToolStripMenuItem.Checked = global::ELPT.Properties.Settings.Default.splitContainerPanel2Collapsed;
             this.仅综合查询ToolStripMenuItem.Name = "仅综合查询ToolStripMenuItem";
-            this.仅综合查询ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.仅综合查询ToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.仅综合查询ToolStripMenuItem.Text = "隐藏右侧窗格";
             this.仅综合查询ToolStripMenuItem.Click += new System.EventHandler(this.仅综合查询ToolStripMenuItem_Click);
             // 
