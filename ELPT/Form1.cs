@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using EO.Base;
+using EO.WebEngine;
+using EO.WebBrowser;
 
 namespace ELPT
 {
@@ -38,7 +41,7 @@ namespace ELPT
         //right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
 
         private WebClient wc = new WebClient();
-        
+
         /// <summary>
         /// 点击查询按钮或按回车时执行
         /// </summary>
@@ -118,17 +121,21 @@ namespace ELPT
             {
                 case -1: break;//在切换词典时执行，节省资源
                 case 0://Dictionary.com
-                    webBrowser2.Navigate("http://dictionary.reference.com/browse/" + ComboBox1.Items[0]);
+                       //webBrowser2.Navigate("http://dictionary.reference.com/browse/" + ComboBox1.Items[0]);
+                    webBrowser2.Url = "http://dictionary.reference.com/browse/" + ComboBox1.Items[0];
                     break;
                 case 1://必应
-                    webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
+                    //webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
+                    webBrowser2.Url = "http://cn.bing.com/dict/" + ComboBox1.Items[0];
                     //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
                     break;
                 case 2://Lexipedia
                     splitContainer2.Panel1Collapsed = true;
-                    webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
+                    //webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
+                    webBrowser2.Url = "http://www.lexipedia.com/english/" + ComboBox1.Items[0];
                     break;
             }
+
         }
 
         /// <summary>
