@@ -41,6 +41,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonDcom = new System.Windows.Forms.Button();
             this.buttonBing = new System.Windows.Forms.Button();
@@ -56,8 +57,6 @@
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.webBrowser2 = new EO.WebBrowser.WebView();
-            this.webControl1 = new EO.WebBrowser.WinForm.WebControl();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -231,8 +230,8 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.webBrowser2, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel2, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.webControl1, 0, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -241,6 +240,17 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(625, 540);
             this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // webBrowser2
+            // 
+            this.webBrowser2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser2.Location = new System.Drawing.Point(3, 32);
+            this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser2.Name = "webBrowser2";
+            this.webBrowser2.ScriptErrorsSuppressed = true;
+            this.webBrowser2.Size = new System.Drawing.Size(619, 505);
+            this.webBrowser2.TabIndex = 1;
+            this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             // 
             // flowLayoutPanel2
             // 
@@ -409,21 +419,6 @@
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 
-            // webBrowser2
-            // 
-            this.webBrowser2.Url = "http://charlie428b.github.io/ELPT/welcome.html";
-            // 
-            // webControl1
-            // 
-            this.webControl1.BackColor = System.Drawing.Color.White;
-            this.webControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webControl1.Location = new System.Drawing.Point(3, 32);
-            this.webControl1.Name = "webControl1";
-            this.webControl1.Size = new System.Drawing.Size(619, 505);
-            this.webControl1.TabIndex = 1;
-            this.webControl1.Text = "webControl1";
-            this.webControl1.WebView = this.webBrowser2;
-            // 
             // Form1
             // 
             this.AcceptButton = this.Button1;
@@ -478,6 +473,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button buttonYouDao;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.WebBrowser webBrowser2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Button buttonDcom;
         private System.Windows.Forms.Button button2;
@@ -495,8 +491,6 @@
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.ToolStripMenuItem 选项ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 仅综合查询ToolStripMenuItem;
-        private EO.WebBrowser.WebView webBrowser2;
-        private EO.WebBrowser.WinForm.WebControl webControl1;
     }
 }
 

@@ -76,18 +76,6 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EO.Base, Version=15.4.1.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.15.4.1.0\lib\EO.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EO.WebBrowser, Version=15.4.1.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.15.4.1.0\lib\EO.WebBrowser.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EO.WebEngine, Version=15.4.1.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.15.4.1.0\lib\EO.WebEngine.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
