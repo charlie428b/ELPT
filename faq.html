@@ -22,7 +22,6 @@
 	{
 		$("dd").hide(500);
 		$("dt").addClass("collapsed");
-		o.innerHTML="展开全部";
 		o.onclick= function(){uncollapseAll(this)};
 	}
 	
@@ -30,7 +29,6 @@
 	{
 		$("dd").show(500);
 		$("dt").removeClass("collapsed");
-		o.innerHTML="隐藏全部"
 		o.onclick=function(){collapseAll(this)};
 	}
 	</script>
@@ -80,10 +78,12 @@
       <div class="inner clearfix">
         <section id="main-content">
 			<p><a href="http://charlie428b.github.io/elptpublish/setup.exe">下载最新版</a></p>
-			<hr /><a onclick='collapseAll(this)' href="javascript:void(0)">隐藏全部</a>
+			<hr /><a onclick='collapseAll(this)' href="javascript:void(0)">全部展开/隐藏</a>
 			<dl>
 				<dt><a href="javascript:void(0)">内容显示不正常（如错位，遮挡）</a></dt>
 				<dd>如果您正在使用的是 Windows 10 系统，请<a href="ELPT:downloadReg">点击此处</a>下载并导入注册表，过程中可能出现权限提示和安全提示，请放心，点击允许即可。其他版本系统暂无解决办法。</dd>
+				<dt><a href="javascript:void(0)">程序出现未响应的情况</a></dt>
+				<dd>一般是因为网速慢导致的，在未来的更新中会改善等待加载的机制。</dd>
 				
 			</dl>
         </section>
