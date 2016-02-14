@@ -8,19 +8,70 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		$("dt").click(function(){
+			$(this).next().toggle(500);
+			$(this).toggleClass("collapsed");
+		});
+	});
+	
+	function collapseAll(o)
+	{
+		$("dd").hide(500);
+		$("dt").addClass("collapsed");
+		o.innerHTML="展开全部";
+		o.onclick= function(){uncollapseAll(this)};
+	}
+	
+	function uncollapseAll(o)
+	{
+		$("dd").show(500);
+		$("dt").removeClass("collapsed");
+		o.innerHTML="隐藏全部"
+		o.onclick=function(){collapseAll(this)};
+	}
+	</script>
+	
+	<style>
+	#main-content dt {
+  margin-bottom: 8px;
+  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #474747;
+  text-indent: 4px;
+}
+#main-content dt:before {
+  padding-right: 0.3em;
+  margin-left: -1.5em;
+  content: "-";
+  color: #9ddcff;
+  
+}
+#main-content dt.collapsed:before {
+  padding-right: 0.3em;
+  margin-left: -1.5em;
+  content: "+";
+  color: #9ddcff;
+  
+}
+	</style>
 	
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>English Learner&#39;s Power Tool by charlie428b</title>
+    <title>常见问题 - English Learner&#39;s Power Tool by charlie428b</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
         <h1>English Learner&#39;s Power Tool</h1>
-        <h2>专为英语学习者制作的强大工具</h2>
+        <h2>常见问题</h2>
         <a href="https://github.com/charlie428b/ELPT" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -28,19 +79,13 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <p><a href="http://charlie428b.github.io/elptpublish/setup.exe">下载最新版</a></p>
-
-<hr>
-
-<h2>
-<a id="软件介绍" class="anchor" href="#%E8%BD%AF%E4%BB%B6%E4%BB%8B%E7%BB%8D" aria-hidden="true"><span class="octicon octicon-link"></span></a>软件介绍</h2>
-
-<hr>
-
-<h2>
-<a id="系统要求" class="anchor" href="#%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82" aria-hidden="true"><span class="octicon octicon-link"></span></a>系统要求</h2>
-
-<p>Windows 10 (低于Windows 10的Windows版本可以运行，但某些内容可能无法正常显示）</p>
+			<p><a href="http://charlie428b.github.io/elptpublish/setup.exe">下载最新版</a></p>
+			<hr /><a onclick='collapseAll(this)' href="javascript:void(0)">隐藏全部</a>
+			<dl>
+				<dt><a href="javascript:void(0)">内容显示不正常（如错位，遮挡）</a></dt>
+				<dd>如果您正在使用的是 Windows 10 系统，请<a href="ELPT:downloadReg">点击此处</a>下载并导入注册表，过程中可能出现权限提示和安全提示，请放心，点击允许即可。其他版本系统暂无解决办法。</dd>
+				
+			</dl>
         </section>
 
         <aside id="sidebar">
