@@ -251,6 +251,7 @@
             this.webBrowser2.Size = new System.Drawing.Size(619, 505);
             this.webBrowser2.TabIndex = 1;
             this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
+            this.webBrowser2.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser2_Navigated);
             // 
             // flowLayoutPanel2
             // 
@@ -411,6 +412,7 @@
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
             this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(114, 26);
             this.帮助ToolStripMenuItem1.Text = "帮助";
+            this.帮助ToolStripMenuItem1.Click += new System.EventHandler(this.帮助ToolStripMenuItem1_Click);
             // 
             // 关于ToolStripMenuItem
             // 

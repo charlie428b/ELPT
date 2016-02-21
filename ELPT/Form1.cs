@@ -66,8 +66,8 @@ namespace ELPT
                 return;
             }
 
-            //加载并播放来自必应的发音
-            axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
+            //防止在不使用综合查询时发音按钮仍然可用
+            axWindowsMediaPlayer1.Ctlenabled = false;
 
             switch (Properties.Settings.Default.left)//在左侧窗格中查询
             {
@@ -87,6 +87,11 @@ namespace ELPT
                         richTextBox1.Text += "[" + (string)pronounce["LEX"]["PRON"][0]["V"] + "]";
                     }
                     catch { }
+
+                    //加载并播放来自必应的发音
+                    axWindowsMediaPlayer1.Ctlenabled = true;
+                    axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
+
                     try
                     {
                         //从有道查询解释
@@ -260,13 +265,19 @@ namespace ELPT
         }
 
         /// <summary>
-        /// 当窗口加载时将splitContainer的拆分器位置设为50%处
+        /// 当窗口加载时
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            //当窗口加载时将splitContainer的拆分器位置设为50%处
             splitContainer2.SplitterDistance = Size.Width / 2;
+            //确保左侧窗格状态正确
+            if (Properties.Settings.Default.left==1)
+            {
+                buttonText_Click("", new EventArgs());
+            }
         }
 
         /// <summary>
@@ -290,6 +301,25 @@ namespace ELPT
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void 帮助ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            webBrowser2.Navigate(@"http://charlie428b.github.io/ELPT/faq.html");
+        }
+
+        private void webBrowser2_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            if (webBrowser2.Url.ToString() == @"http://charlie428b.github.io/downloadReg")
+            {
+                wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg32.reg", "reg32.reg");
+                System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
+                if (Environment.Is64BitOperatingSystem)
+                {
+                    wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg64.reg", "reg64.reg");
+                    System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
+                }
+            }
         }
     }
 }
