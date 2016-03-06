@@ -38,7 +38,8 @@ namespace ELPT
         //right = 1;//0=Dictionary.com 1=必应 2=Lexipedia
 
         private WebClient wc = new WebClient();
-        
+        private WebClient wc2 = new WebClient();
+
         /// <summary>
         /// 点击查询按钮或按回车时执行
         /// </summary>
@@ -52,7 +53,7 @@ namespace ELPT
         /// <summary>
         /// 在两个窗格中查询用户最后一次输入的词
         /// </summary>
-        private void Search()
+        private async void Search()
         {
             if (ComboBox1.Text != "")
             {
@@ -67,7 +68,10 @@ namespace ELPT
             }
 
             //防止在不使用综合查询时发音按钮仍然可用
-            axWindowsMediaPlayer1.Ctlenabled = false;
+            if (Properties.Settings.Default.left != 1 && Properties.Settings.Default.left != -1)
+            {
+                axWindowsMediaPlayer1.Ctlenabled = false;
+            }
 
             switch (Properties.Settings.Default.left)//在左侧窗格中查询
             {
@@ -76,40 +80,55 @@ namespace ELPT
                     webBrowser1.Navigate("http://dict.youdao.com/search?q=" + ComboBox1.Items[0]);
                     break;
                 case 1://综合查询
-                    labelWord.Text = ComboBox1.Items[0].ToString();
-                    richTextBox1.ResetText();
+                    labelWord.Text = ComboBox1.Items[0].ToString();//显示当前正在查询的词
                     try
                     {
-                        //从必应查询美式读音
-                        byte[] resultByteP = wc.DownloadData("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
-                        string resultP = Encoding.UTF8.GetString(resultByteP);
-                        JObject pronounce = JObject.Parse(resultP);
-                        richTextBox1.Text += "[" + (string)pronounce["LEX"]["PRON"][0]["V"] + "]";
+                        //同时发起两个网络请求
+                        Task<byte[]> requestBing = wc.DownloadDataTaskAsync("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
+                        Task<byte[]> requestYoudao = wc2.DownloadDataTaskAsync("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
+                        richTextBox1.Text = "正在查询...";
+                        try
+                        {
+                            //从必应查询美式读音
+                            byte[] resultByteP = await requestBing;
+                            richTextBox1.ResetText();//清空richTextBox的内容
+                            string resultP = Encoding.UTF8.GetString(resultByteP);
+                            JObject pronounce = JObject.Parse(resultP);
+                            richTextBox1.Text += "[" + (string)pronounce["LEX"]["PRON"][0]["V"] + "]";
+                        }
+                        catch { }
+
+                        //加载并播放来自必应的发音
+                        axWindowsMediaPlayer1.Ctlenabled = true;
+                        axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
+
+                        try
+                        {
+                            //从有道查询解释
+                            byte[] resultByte = await requestYoudao;
+                            string result = Encoding.UTF8.GetString(resultByte);
+                            JObject explain = JObject.Parse(result);
+                            foreach (var item in explain["ec"]["word"][0]["trs"].Children())
+                            {
+                                richTextBox1.Text += "\n" + (string)item["tr"][0]["l"]["i"][0];
+                            }
+
+                            //从有道查询词形变化
+                            foreach (var item in explain["ec"]["word"][0]["wfs"])
+                            {
+                                richTextBox1.Text += "\n" + (string)item["wf"]["name"] + "：" + (string)item["wf"]["value"];
+                            }
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "解析释义出错，请重试。";
+                        }
                     }
-                    catch { }
-
-                    //加载并播放来自必应的发音
-                    axWindowsMediaPlayer1.Ctlenabled = true;
-                    axWindowsMediaPlayer1.URL = "http://media.engkoo.com:8129/en-US/" + ComboBox1.Items[0] + ".mp3";
-
-                    try
+                    catch
                     {
-                        //从有道查询解释
-                        byte[] resultByte = wc.DownloadData("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
-                        string result = Encoding.UTF8.GetString(resultByte);
-                        JObject explain = JObject.Parse(result);
-                        foreach (var item in explain["ec"]["word"][0]["trs"].Children())
-                        {
-                            richTextBox1.Text += "\n" + (string)item["tr"][0]["l"]["i"][0];
-                        }
-
-                        //从有道查询词形变化
-                        foreach (var item in explain["ec"]["word"][0]["wfs"])
-                        {
-                            richTextBox1.Text += "\n" + (string)item["wf"]["name"] + "：" + (string)item["wf"]["value"];
-                        }
+                        //throw;
+                        richTextBox1.Text = "下载数据出错，请重试。";
                     }
-                    catch { }
                     break;
             }
 
@@ -274,7 +293,7 @@ namespace ELPT
             //当窗口加载时将splitContainer的拆分器位置设为50%处
             splitContainer2.SplitterDistance = Size.Width / 2;
             //确保左侧窗格状态正确
-            if (Properties.Settings.Default.left==1)
+            if (Properties.Settings.Default.left == 1)
             {
                 buttonText_Click("", new EventArgs());
             }
