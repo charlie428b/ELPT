@@ -73,20 +73,58 @@ namespace ELPT
                 axWindowsMediaPlayer1.Ctlenabled = false;
             }
 
-            switch (Properties.Settings.Default.left)//在左侧窗格中查询
+            //综合查询的预先下载步骤是否出错的flag
+            bool flagRequestErr = false;
+
+            //使用综合查询时提前发起请求，节省时间
+            Task<byte[]> requestBing = null, requestYoudao = null;
+            if (Properties.Settings.Default.left == 1)
             {
-                case -1: break;//在切换词典时执行，节省资源
-                case 0://有道
-                    webBrowser1.Navigate("http://dict.youdao.com/search?q=" + ComboBox1.Items[0]);
-                    break;
-                case 1://综合查询
-                    labelWord.Text = ComboBox1.Items[0].ToString();//显示当前正在查询的词
-                    try
-                    {
-                        //同时发起两个网络请求
-                        Task<byte[]> requestBing = wc.DownloadDataTaskAsync("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
-                        Task<byte[]> requestYoudao = wc2.DownloadDataTaskAsync("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
-                        richTextBox1.Text = "正在查询...";
+                try
+                {
+                    //同时发起两个网络请求
+                    requestBing = wc.DownloadDataTaskAsync("http://dict.bing.com.cn/api/http/v2/4154AA7A1FC54ad7A84A0236AA4DCAF1/en-us/zh-cn/lexicon/?q=" + ComboBox1.Items[0] + "&format=application/json&theme={Win10}+3251FBE529D34206822990E48226D8BE");
+                    requestYoudao = wc2.DownloadDataTaskAsync("http://dict.youdao.com/jsonapi?q=" + ComboBox1.Items[0] + "&keyfrom=deskdict.main&dogVersion=1.0&dogui=json&client=deskdict&id=075aef8658e2c89b0&vendor=unknown&in=YoudaoDictFull&appVer=6.3.67.7016&appZengqiang=1&abTest=2&le=eng&dicts=%7B%22count%22%3A11%2C%22dicts%22%3A%5B%5B%22ec%22%2C%22ce%22%2C%22cj%22%2C%22jc%22%2C%22ck%22%2C%22kc%22%2C%22cf%22%2C%22fc%22%5D%2C%5B%22pic_dict%22%5D%2C%5B%22web_trans%22%2C%22special%22%2C%22ee%22%2C%22hh%22%5D%2C%5B%22collins%22%2C%22ec21%22%2C%22ce_new%22%5D%2C");
+                    richTextBox1.Text = "正在查询...";
+                }
+                catch
+                {
+                    //throw;
+                    richTextBox1.Text = "下载数据出错，请重试。";
+                }
+            }
+
+            //当右侧窗格被隐藏时不再在右侧窗格中查询
+            if (!Properties.Settings.Default.splitContainerPanel2Collapsed)
+            {
+                splitContainer2.Panel1Collapsed = false;
+                switch (Properties.Settings.Default.right)//在右侧窗格中查询
+                {
+                    case -1: break;//在切换词典时执行，节省资源
+                    case 0://Dictionary.com
+                        webBrowser2.Navigate("http://dictionary.reference.com/browse/" + ComboBox1.Items[0]);
+                        break;
+                    case 1://必应
+                        webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
+                        //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
+                        break;
+                    case 2://Lexipedia
+                        splitContainer2.Panel1Collapsed = true;
+                        webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
+                        break;
+                }
+            }
+
+            if (!flagRequestErr)
+            {
+                switch (Properties.Settings.Default.left)//在左侧窗格中查询
+                {
+                    case -1: break;//在切换词典时执行，节省资源
+                    case 0://有道
+                        webBrowser1.Navigate("http://dict.youdao.com/search?q=" + ComboBox1.Items[0]);
+                        break;
+                    case 1://综合查询
+                        labelWord.Text = ComboBox1.Items[0].ToString();//显示当前正在查询的词
                         try
                         {
                             //从必应查询美式读音
@@ -121,37 +159,10 @@ namespace ELPT
                         }
                         catch
                         {
-                            richTextBox1.Text += "解析释义出错，请重试。";
+                            //richTextBox1.Text += "解析释义出错，请重试。";
                         }
-                    }
-                    catch
-                    {
-                        //throw;
-                        richTextBox1.Text = "下载数据出错，请重试。";
-                    }
-                    break;
-            }
-
-            //当右侧窗格被隐藏时不再在右侧窗格中查询
-            if (Properties.Settings.Default.splitContainerPanel2Collapsed)
-            {
-                return;
-            }
-            splitContainer2.Panel1Collapsed = false;
-            switch (Properties.Settings.Default.right)//在右侧窗格中查询
-            {
-                case -1: break;//在切换词典时执行，节省资源
-                case 0://Dictionary.com
-                    webBrowser2.Navigate("http://dictionary.reference.com/browse/" + ComboBox1.Items[0]);
-                    break;
-                case 1://必应
-                    webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
-                    //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
-                    break;
-                case 2://Lexipedia
-                    splitContainer2.Panel1Collapsed = true;
-                    webBrowser2.Navigate("http://www.lexipedia.com/english/" + ComboBox1.Items[0]);
-                    break;
+                        break;
+                }
             }
         }
 
