@@ -338,17 +338,36 @@ namespace ELPT
             webBrowser2.Navigate(@"http://charlie428b.github.io/ELPT/faq.html");
         }
 
-        private void webBrowser2_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        /// <summary>
+        /// 当右侧WebBrowser发生导航事件时检查URL是否需要程序做出反应
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void webBrowser2_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            if (webBrowser2.Url.ToString() == @"http://charlie428b.github.io/downloadReg")
+
+            //在帮助中点击了下载注册表则自动导入注册表
+            if (e.Url.ToString() == @"http://charlie428b.github.io/downloadReg")
             {
-                wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg32.reg", "reg32.reg");
-                System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
-                if (Environment.Is64BitOperatingSystem)
+                ((WebBrowser)sender).Stop();//停止导航
+                try
                 {
-                    wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg64.reg", "reg64.reg");
-                    System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
+                    await wc.DownloadFileTaskAsync(@"http://charlie428b.github.io/ELPT/reg32.reg", "reg32.reg");
+
+                    System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
+                    if (Environment.Is64BitOperatingSystem)
+                    {
+                        wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg64.reg", "reg64.reg");
+                        System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
+                    }
                 }
+                catch { }
+            }
+            //触发了WebBrowser暂不支持的网页音频，使用程序中的音频控件播放
+            if (e.Url.ToString().Contains(".mp3") || e.Url.ToString().Contains(".ogg"))
+            {
+                axWindowsMediaPlayer1.URL = e.Url.ToString();
+                ((WebBrowser)sender).Stop();//停止导航
             }
         }
     }
