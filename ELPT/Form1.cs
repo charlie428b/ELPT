@@ -106,7 +106,6 @@ namespace ELPT
                         break;
                     case 1://必应
                         webBrowser2.Navigate("http://cn.bing.com/dict/" + ComboBox1.Items[0]);
-                        //webBrowser2.Navigate("javascript:({document.getElementById(\"target\").click();})()");
                         break;
                     case 2://Lexipedia
                         splitContainer2.Panel1Collapsed = true;
@@ -368,6 +367,15 @@ namespace ELPT
             {
                 axWindowsMediaPlayer1.URL = e.Url.ToString();
                 ((WebBrowser)sender).Stop();//停止导航
+            }
+        }
+
+        private void webBrowser2_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            //为必应词典去除顶部输入框
+            if (e.Url.ToString().Contains(@"cn.bing.com/dict/"))
+            {
+                webBrowser2.Navigate("javascript:(function(){document.getElementById(\"sb_form\").style.display=\"none\";})()");
             }
         }
     }
