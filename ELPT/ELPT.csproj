@@ -23,13 +23,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://charlie428b.github.io/elptpublish/</InstallUrl>
+    <InstallUrl>http://liuchibing.github.io/elptpublish/</InstallUrl>
     <SupportUrl>http://charlie428b.github.io/ELPT</SupportUrl>
     <ErrorReportUrl>http://charlie428b.github.io/ELPT</ErrorReportUrl>
     <ProductName>ELPT</ProductName>
     <PublisherName>刘持冰</PublisherName>
     <SuiteName>ELPT</SuiteName>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.2.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

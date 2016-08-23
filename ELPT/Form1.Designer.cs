@@ -250,7 +250,7 @@
             this.webBrowser2.ScriptErrorsSuppressed = true;
             this.webBrowser2.Size = new System.Drawing.Size(619, 505);
             this.webBrowser2.TabIndex = 1;
-            this.webBrowser2.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
+            this.webBrowser2.Url = new System.Uri("http://liuchibing.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             this.webBrowser2.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser2_Navigated);
             this.webBrowser2.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser2_Navigating);
             // 
