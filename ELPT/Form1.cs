@@ -334,7 +334,7 @@ namespace ELPT
 
         private void 帮助ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            webBrowser2.Navigate(@"http://charlie428b.github.io/ELPT/faq.html");
+            webBrowser2.Navigate(@"http://liuchibing.github.io/ELPT/faq.html");
         }
 
         /// <summary>
@@ -346,17 +346,17 @@ namespace ELPT
         {
 
             //在帮助中点击了下载注册表则自动导入注册表
-            if (e.Url.ToString() == @"http://charlie428b.github.io/downloadReg")
+            if (e.Url.ToString() == @"http://liuchibing.github.io/downloadReg")
             {
                 ((WebBrowser)sender).Stop();//停止导航
                 try
                 {
-                    await wc.DownloadFileTaskAsync(@"http://charlie428b.github.io/ELPT/reg32.reg", "reg32.reg");
+                    await wc.DownloadFileTaskAsync(@"http://liuchibing.github.io/ELPT/reg32.reg", "reg32.reg");
 
                     System.Diagnostics.Process.Start(Application.StartupPath + "\\reg32.reg");
                     if (Environment.Is64BitOperatingSystem)
                     {
-                        wc.DownloadFile(@"http://charlie428b.github.io/ELPT/reg64.reg", "reg64.reg");
+                        wc.DownloadFile(@"http://liuchibing.github.io/ELPT/reg64.reg", "reg64.reg");
                         System.Diagnostics.Process.Start(Application.StartupPath + "\\reg64.reg");
                     }
                 }
@@ -375,8 +375,15 @@ namespace ELPT
             //为必应词典去除顶部输入框
             if (e.Url.ToString().Contains(@"cn.bing.com/dict/"))
             {
-                webBrowser2.Navigate("javascript:(function(){document.getElementById(\"sb_form\").style.display=\"none\";})()");
+                timerBingJS.Start();
             }
+        }
+
+        private void timerBingJS_Tick(object sender, EventArgs e)
+        {
+            //为必应词典去除顶部输入框
+            webBrowser2.Navigate("javascript:(function(){document.getElementById(\"sb_form\").style.display=\"none\";})()");
+            timerBingJS.Stop();
         }
     }
 }
