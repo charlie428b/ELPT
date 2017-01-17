@@ -225,7 +225,7 @@
             this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.Size = new System.Drawing.Size(380, 508);
             this.webBrowser1.TabIndex = 1;
-            this.webBrowser1.Url = new System.Uri("http://charlie428b.github.io/ELPT/welcome.html", System.UriKind.Absolute);
+            this.webBrowser1.Url = new System.Uri("http://liuchibing.github.io/ELPT/welcome.html", System.UriKind.Absolute);
             this.webBrowser1.Visible = false;
             // 
             // tableLayoutPanel4
@@ -253,6 +253,7 @@
             this.webBrowser2.Size = new System.Drawing.Size(619, 505);
             this.webBrowser2.TabIndex = 1;
             this.webBrowser2.Url = new System.Uri("http://liuchibing.github.io/ELPT/welcome.html", System.UriKind.Absolute);
+            this.webBrowser2.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser2_DocumentCompleted);
             this.webBrowser2.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser2_Navigated);
             this.webBrowser2.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser2_Navigating);
             // 
@@ -351,7 +352,6 @@
             this.ComboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ComboBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.ComboBox1.Location = new System.Drawing.Point(4, 4);
             this.ComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.ComboBox1.Name = "ComboBox1";
@@ -413,14 +413,14 @@
             // 帮助ToolStripMenuItem1
             // 
             this.帮助ToolStripMenuItem1.Name = "帮助ToolStripMenuItem1";
-            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.帮助ToolStripMenuItem1.Size = new System.Drawing.Size(114, 26);
             this.帮助ToolStripMenuItem1.Text = "帮助";
             this.帮助ToolStripMenuItem1.Click += new System.EventHandler(this.帮助ToolStripMenuItem1_Click);
             // 
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(114, 26);
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.关于ToolStripMenuItem_Click);
             // 

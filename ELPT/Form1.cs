@@ -372,18 +372,24 @@ namespace ELPT
 
         private void webBrowser2_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
-            //为必应词典去除顶部输入框
-            if (e.Url.ToString().Contains(@"cn.bing.com/dict/"))
-            {
-                timerBingJS.Start();
-            }
+            ////为必应词典去除顶部输入框
+            //if (e.Url.ToString().Contains(@"cn.bing.com/dict/"))
+            //{
+            //    timerBingJS.Start();
+            //}
         }
 
         private void timerBingJS_Tick(object sender, EventArgs e)
         {
+            ////为必应词典去除顶部输入框
+            //webBrowser2.Navigate("javascript:(function(){document.getElementById(\"sb_form\").style.display=\"none\";})()");
+            //timerBingJS.Stop();
+        }
+
+        private void webBrowser2_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
             //为必应词典去除顶部输入框
             webBrowser2.Navigate("javascript:(function(){document.getElementById(\"sb_form\").style.display=\"none\";})()");
-            timerBingJS.Stop();
         }
     }
 }
