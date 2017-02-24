@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 
 namespace ELPT
 {
@@ -55,6 +56,42 @@ namespace ELPT
         /// </summary>
         private async void Search()
         {
+            //彩蛋
+            if (ComboBox1.Text == "#cmd")
+            {
+                Process pro = new Process();
+                ProcessStartInfo info = new ProcessStartInfo("cmd");
+                info.CreateNoWindow = true;
+                info.RedirectStandardOutput = true;
+                info.RedirectStandardInput = true;
+                info.RedirectStandardError = true;
+                info.UseShellExecute = false;
+                pro.StartInfo = info;
+                pro.Start();
+                pro.OutputDataReceived += (sender, e) =>
+                  {
+                      try
+                      {
+                          richTextBox1.AppendText(e.Data + "\n");
+                      }
+                      catch { }
+                  };
+                pro.BeginOutputReadLine();
+                Button1.Click += (sender, e) =>
+                {
+                    if (ComboBox1.Text.StartsWith(@"$"))
+                    {
+                        pro.StandardInput.WriteLine(ComboBox1.Text.Substring(1));
+                        ComboBox1.Text = "";
+                    }
+                };
+                ComboBox1.Text = "";
+                return;
+            }
+            if (ComboBox1.Text.StartsWith(@"$"))
+            {
+                return;
+            }
             if (ComboBox1.Text != "")
             {
                 //存入历史纪录并清空输入框
@@ -300,6 +337,7 @@ namespace ELPT
         /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
+            CheckForIllegalCrossThreadCalls = false;
             //当窗口加载时将splitContainer的拆分器位置设为50%处
             splitContainer2.SplitterDistance = Size.Width / 2;
             //确保左侧窗格状态正确

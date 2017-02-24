@@ -185,8 +185,8 @@
             this.panelTextBox.Location = new System.Drawing.Point(0, 0);
             this.panelTextBox.Name = "panelTextBox";
             this.panelTextBox.RowCount = 2;
-            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.93738F));
-            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.06262F));
+            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.549904F));
+            this.panelTextBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.4501F));
             this.panelTextBox.Size = new System.Drawing.Size(380, 508);
             this.panelTextBox.TabIndex = 2;
             // 
